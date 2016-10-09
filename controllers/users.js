@@ -32,12 +32,12 @@ exports.createUser = function(userObj, callback){
 exports.updateUser = function(reqObj, callback){
     User.findOne({_id:reqObj.user._id}, function (err, user) {
         if(err) return callback(err);
-        if(reqObj.body.name) user.profile.name = req.body.name;
-        if(reqObj.body.address) user.address = req.body.address;
+        if(reqObj.body.name) user.profile.name = reqObj.body.name;
+        if(reqObj.body.address) user.address = reqObj.body.address;
 
         user.save(function(err){
-            if(err) return next(err);
-            return 'Successfully edited your profile.';
+            if(err) return callback(err, null);
+            return callback(null,'Successfully edited your profile.');
         })
     });
 };
